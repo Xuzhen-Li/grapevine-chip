@@ -1,9 +1,9 @@
 # grapevine-chip
 
-**Moved.** Chip design belongs with the [grapeancestry](https://github.com/Xuzhen-Li/grapeancestry) product.
+Grapevine capture-array design. This repo is the full chip-design path: scripts and notes taken from this machine and from the papers.
 
-This repo stays as a thin redirect so old links do not break.
+It is not a redirect. The 167K walkthrough (ancestry, identity, PCA) stays in [grapeancestry](https://github.com/Xuzhen-Li/grapeancestry). The reusable service scaffold stays in [gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit).
 
-**Public note (2026-09-28):** [`grapeancestry/tree/main/chip`](https://github.com/Xuzhen-Li/grapeancestry/tree/main/chip) returns **HTTP 404** — `chip/` is not in the grapeancestry public file tree. Do not create that directory here or there from this redirect. Use the [grapeancestry repo root](https://github.com/Xuzhen-Li/grapeancestry).
+Scripts are not in this tree yet.
 
 **Author:** Xuzhen Li · [ORCID](https://orcid.org/0000-0003-3670-6657)
