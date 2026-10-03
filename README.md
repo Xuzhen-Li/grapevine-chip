@@ -1,9 +1,9 @@
 # grapevine-chip
 
-Grapevine capture-array design. This repo is the full chip-design path: scripts and notes taken from this machine and from the papers.
+How to design your own chip. This repo is the design path: choose sites, check them against the annotation, and freeze a panel. It is not a place to analyze data from a chip you already hold.
 
-It is not a redirect. The 167K walkthrough (ancestry, identity, PCA) stays in [grapeancestry](https://github.com/Xuzhen-Li/grapeancestry). The reusable service scaffold stays in [gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit).
+The analysis suite for data you already have is [gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit). The grapevine 167K walkthrough stays in [grapeancestry](https://github.com/Xuzhen-Li/grapeancestry).
 
-Scripts are not in this tree yet.
+The design notes are not cleaned into steps yet.
 
 **Author:** Xuzhen Li · [ORCID](https://orcid.org/0000-0003-3670-6657)
