@@ -1,11 +1,12 @@
 # Design steps
 
-Source: local notebook `00_array/##芯片位点处理全流程.md` (1836 lines). Line numbers below are that file. Commands were copied out of a working notebook. A block that starts with `#!/bin/bash` and `#SBATCH` is a pasted cluster job, not a command this repository runs or supports. Cluster paths under `/public/gxyy/...` are left as names of what the notes point at; they are not reproduced here as a recipe.
+Each file is Input, Do, and Get.
+
+Source: the local notebook in `00_array`. Commands were copied out of a working notebook. A block that starts with `#!/bin/bash` and `#SBATCH` is a pasted cluster job, not a command this repository runs or supports. Cluster paths under `/public/gxyy/...` are left as names of what the notes point at; they are not reproduced here as a recipe.
 
 Sequencing results stay off GitHub. This file does not include VCFs, BAMs, or probe tables.
 
 Each step is its own file.
-
 
 - [1. Look at where reads and sites fall on the annotation](steps/01-annotation-overlap.md)
 - [2. Annotate SNP function](steps/02-snp-function.md)

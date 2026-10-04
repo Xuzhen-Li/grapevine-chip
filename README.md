@@ -10,11 +10,11 @@ Step detail: [docs/steps.md](docs/steps.md).
 
 ## Where the steps came from
 
-The ordered path is the notebook `##芯片位点处理全流程.md` in the local folder `00_array` (1836 lines). Reference names in that notebook are `VS1.final.fa` and `VS1.final.gff3`. Chromosome count used with plink is `--chr-set 19`.
+The ordered path is the local notebook in the local folder `00_array`. Reference names in that notebook are `VS1.final.fa` and `VS1.final.gff3`. Chromosome count used with plink is `--chr-set 19`.
 
 ## Design path
 
-One file per step. The list is [docs/steps.md](docs/steps.md).
+One file per step. Each file is Input, Do, and Get. The list is [docs/steps.md](docs/steps.md).
 
 1. [Where reads and sites fall](docs/steps/01-annotation-overlap.md)
 2. [SNP function](docs/steps/02-snp-function.md)

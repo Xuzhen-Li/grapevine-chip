@@ -1,7 +1,19 @@
-## 7. Split named populations
+# 7. Split named populations
 
-Lines 390–406.
+## Input
 
-Groups written in the notes: `CG1-6`, `WWE12`, `WEE12`. A loop over `*.info` files writes SLURM scripts that `vcftools --keep` the MAF 0.05 / missingness 0.4 VCF. The notebook does not define the groups.
+- Recorded in the local notebook at lines 390–406.
+- Groups written in the notes: `CG1-6`, `WWE12`, `WEE12`.
+- A loop over `*.info` files writes cluster scripts.
+- The VCF those scripts keep is the MAF 0.05 and missingness 0.4 VCF.
+- The notebook does not define the groups.
 
-Back to [the step list](../steps.md).
+## Do
+
+```bash
+vcftools --keep
+```
+
+## Get
+
+- One kept VCF per `*.info` group named above. No output filename is written in this step.
