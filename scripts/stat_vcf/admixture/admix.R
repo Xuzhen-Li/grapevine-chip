@@ -164,7 +164,7 @@ library(dplyr)
 require(ggplot2) 
 
 # 读取数据，因为没有表头，我们需要手动指定列名
-data <- read.table("k3_2449_grp.txt", header=FALSE, sep="\t", col.names=c("ID", "K1", "K2", "K3", "Group"))
+data <- read.table("k3_grp.txt", header=FALSE, sep="\t", col.names=c("ID", "K1", "K2", "K3", "Group"))
 # 假设你的原始数据框架叫做data，并且它已经被读入R中
 # 首先确保数据是按照分组和ID排序的
 data <- data %>% arrange(Group)
@@ -191,7 +191,7 @@ library(tidyr)
 library(dplyr)
 
 # 读取数据
-data <- read.table("k3_2449_grp.txt", header = FALSE, col.names = c("ID", "K1", "K2", "K3", "Group"))
+data <- read.table("k3_grp.txt", header = FALSE, col.names = c("ID", "K1", "K2", "K3", "Group"))
 
 # 转换数据为长格式
 data_long <- pivot_longer(data, cols = K1:K3, names_to = "Ancestry", values_to = "Proportion")
@@ -222,7 +222,7 @@ color_palette <- brewer.pal(8, "Set1")
 # 准备一个循环处理k2到k8
 for (k in 2:8) {
   # 构造文件名
-  file_name <- paste0("k", k, "_2449_grp.txt")
+  file_name <- paste0("k", k, "_grp.txt")
   
   # 读取数据
   data <- read.table(file_name, header = FALSE, col.names = c("ID", paste0("K", 1:k), "Group"))
@@ -247,7 +247,7 @@ for (k in 2:8) {
 检查非数字
 # 读取数据文件，假设列名为ID, K1, K2, K3, K4, K5, Group
 # 请将文件名更改为实际的文件名
-data <- read.table("k5_2449_grp.txt", header = FALSE, col.names = c("ID", "K1", "K2", "K3", "K4", "K5", "Group"))
+data <- read.table("k5_grp.txt", header = FALSE, col.names = c("ID", "K1", "K2", "K3", "K4", "K5", "Group"))
 
 # 检查前几行的K5列数据
 head(data$K5)

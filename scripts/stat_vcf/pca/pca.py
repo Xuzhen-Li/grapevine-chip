@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # 读取CSV文件
-file_path = 'pca2449_203985.csv'
+file_path = 'pca.csv'
 df = pd.read_csv(file_path, sep=',')
 
 # 确定颜色和标记字典是否已经准备好
@@ -32,21 +32,19 @@ markers = {
 
 # 创建散点图
 for category, group in df.groupby('Grp'):
-    plt.scatter(group['PC1(6.12%)'], group['PC2(2.42%)'], 
+    plt.scatter(group['PC1'], group['PC2'], 
                 color=colors.get(category, 'gray'), 
                 marker=markers.get(category, 'o'), 
                 alpha=0.5, 
                 label=category)
 
 # 自定义图表
-plt.xlabel('PC 1 (6.12%)')
-plt.ylabel('PC 2 (2.42%)')
+plt.xlabel('PC 1')
+plt.ylabel('PC 2')
 plt.title('PCA Plot')
 plt.legend(title='Group', bbox_to_anchor=(1.05, 1), loc='upper left')
 
 # 设置x轴和y轴的范围
-plt.xlim(-0.025, 0.05)  # 例如：x轴范围从-0.1到0.1
-plt.ylim(-0.01, 0.011)  # 例如：y轴范围从-0.1到0.1
 
 # 调整布局以为图例留出空间
 plt.tight_layout()

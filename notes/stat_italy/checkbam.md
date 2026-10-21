@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # checkbam.sh  用法：bash checkbam.sh in.bam
 set -e
 bam=$1
