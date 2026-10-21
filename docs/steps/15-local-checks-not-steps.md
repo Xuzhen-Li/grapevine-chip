@@ -5,18 +5,18 @@
 - Paths under `00_array`.
 - `wgs.pos` against `fianl_pos.txt` in `intervalpos&region.py`.
 - `dedup_overlaps_region.txt` and probe-cover rows in `WGStest.csv` for `matched_intervals.py`.
-- A chip MAF BED for `stat_vcf_from_3527/maf_distribution.py`.
-- Adjacent sites for `stat_vcf_from_3527/pos_interval_stat.py`.
-- Het and missing rates for `stat_vcf_from_3527/stat_rate.py`.
+- A chip MAF BED for `stat_vcf/maf_distribution.py`.
+- Adjacent sites for `stat_vcf/pos_interval_stat.py`.
+- Het and missing rates for `stat_vcf/stat_rate.py`.
 
 ## Do
 
 ```bash
 intervalpos&region.py
 matched_intervals.py
-stat_vcf_from_3527/maf_distribution.py
-stat_vcf_from_3527/pos_interval_stat.py
-stat_vcf_from_3527/stat_rate.py
+stat_vcf/maf_distribution.py
+stat_vcf/pos_interval_stat.py
+stat_vcf/stat_rate.py
 ```
 
 ## Get
