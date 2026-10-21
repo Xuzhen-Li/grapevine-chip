@@ -2,7 +2,7 @@
 
 Each file is Input, Do, and Get.
 
-Source: the local notebook in `00_array`. Commands were copied out of a working notebook. A block that starts with `#!/bin/bash` and `#SBATCH` is a pasted cluster job, not a command this repository runs or supports. Cluster paths under `/public/gxyy/...` are left as names of what the notes point at; they are not reproduced here as a recipe.
+Source: the local notebook in `00_array`. Commands were copied out of a working notebook. A block that starts with `#!/bin/bash` and `#SBATCH` is a pasted cluster job, not a command this repository runs or supports. Cluster paths under `<DATA_DIR>/...` are left as names of what the notes point at; they are not reproduced here as a recipe.
 
 Sequencing results stay off GitHub. This file does not include VCFs, BAMs, or probe tables.
 
