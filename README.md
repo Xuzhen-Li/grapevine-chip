@@ -4,12 +4,12 @@ Notes on how a grapevine SNP capture panel was designed: which sites were
 kept, how they were spaced, and why. Start with
 [docs/DESIGN_RATIONALE.md](docs/DESIGN_RATIONALE.md).
 
-This is a record of one design, written from a working notebook. It is not
-a pipeline you can run end to end. Many commands are pasted cluster (SLURM)
-jobs with paths that only existed on that cluster. VCFs, BAMs, and probe
-tables are not in the repository.
+This is a record of a single design, written from a working notebook. It is
+not an end-to-end runnable pipeline. Many commands are pasted cluster (SLURM)
+jobs referencing paths that existed only on that cluster. VCFs, BAMs, and
+probe tables are not included in the repository.
 
-To analyze data from a chip you already have, use
+To analyze data from an existing chip, use
 [gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit)
 (genotyping by target sequencing).
 The grapevine 167K walkthrough is in
@@ -19,28 +19,28 @@ The grapevine 167K walkthrough is in
 ## Design in short
 
 1. Start from whole-genome SNP calls on the VS1 reference (19 chromosomes).
-2. Keep biallelic SNPs; filter by MAF and missingness (0.01/0.5 loose; a 0.05/0.4 strict set appears in file names, but its command was not recorded).
-3. LD-prune with `plink --indep-pairwise 50 5 <r2>`, run at r² 0.1, 0.3 and 0.5 (file names also show 0.4 and 0.7). The cutoff sets the panel size.
-4. Keep sites with mean depth of at least 10.
+2. Keep biallelic SNPs; filter by MAF and missingness (0.01/0.5 loose; a 0.05/0.4 strict set appears in file names, though its command was not recorded).
+3. LD-prune with `plink --indep-pairwise 50 5 <r2>`, run at r² 0.1, 0.3, and 0.5 (file names also show 0.4 and 0.7). This cutoff determines the panel size.
+4. Keep sites with a mean depth of at least 10.
 5. Score each site by minor allele frequency.
-6. Keep one site per 2 kb window, the one with the highest MAF.
-7. Repeat that pick inside exons, genes, and CDS, and merge.
+6. Keep one site per 2 kb window, selecting the one with the highest MAF.
+7. Repeat that selection inside exons, genes, and CDS, then merge.
 8. Add planned classes (breeding sites, population-private sites). These were never scripted.
-9. Freeze the union. Vendor scoring was planned as the last step and not recorded.
+9. Freeze the union. Vendor scoring was planned as the final step and was not recorded.
 
-After the chip is made, compare its genotypes with the whole-genome calls on
-the same samples (`scripts/stat_italy/hete2homo.py`; a synthetic example is in
-`scripts/stat_italy/example_synthetic/`). The script pairs the two files row by
-row, so both must list the same sites in the same order and the same samples in
-the same columns; it stops with a message if they do not.
+After the chip is made, compare its genotypes against whole-genome
+calls on the same samples (`scripts/stat_italy/hete2homo.py`; a synthetic
+example is in `scripts/stat_italy/example_synthetic/`). The script pairs the
+two files row by row, so both must list the same sites in the same order and
+the same samples in the same columns; it stops with a message if they do not.
 
 ## Source
 
-The steps follow a local notebook in a folder named `00_array`. Reference names in that notebook are `VS1.final.fa` and `VS1.final.gff3`. Chromosome count used with plink is `--chr-set 19`.
+The steps follow a local notebook in a folder named `00_array`. Reference names in that notebook are `VS1.final.fa` and `VS1.final.gff3`. The chromosome count passed to plink is `--chr-set 19`.
 
 ## Step files
 
-One file per step, each split into Input, Do, and Get. Index: [docs/steps.md](docs/steps.md).
+One file per step, each divided into Input, Do, and Get. Index: [docs/steps.md](docs/steps.md).
 
 1. [Where reads and sites fall](docs/steps/01-annotation-overlap.md)
 2. [SNP function](docs/steps/02-snp-function.md)
