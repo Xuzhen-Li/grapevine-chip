@@ -35,7 +35,7 @@ on the same samples.
 
 ### 3. LD pruning: the knob for panel size
 
-- `plink --indep-pairwise 50 5 r²` with r² 0.1, 0.3, 0.5 on the loose set, and 0.1 on the strict set; file names also show 0.4 and 0.7 sets ([step 4](steps/04-ld-prune.md), [step 6](steps/06-maf-bed.md)).
+- `plink --indep-pairwise 50 5 <r2>` with r² 0.1, 0.3, 0.5 on the loose set, and 0.1 on the strict set; file names also show 0.4 and 0.7 sets ([step 4](steps/04-ld-prune.md), [step 6](steps/06-maf-bed.md)).
 - Reading of the commands: each r² cutoff gives a different number of sites, and every later step was run for several cutoffs side by side (ld01, ld03, ld04, ld05). Choosing the cutoff is how the final site count is set. The notes do not record which count was the target.
 
 ### 4. Mean depth at least 10
@@ -86,7 +86,7 @@ No command or output file was recorded for any of these. They are design intenti
 
 [../notes/stat_array.md](../notes/stat_array.md) and `scripts/stat_italy/` hold the checks used on capture data:
 
-- Genotype agreement between capture and whole-genome calls on the same samples, split into change types such as 0/1 to 0/0 (`scripts/stat_italy/hete2homo.py`; synthetic example in `scripts/stat_italy/example_synthetic/`).
+- Genotype agreement between capture and whole-genome calls on the same samples, split into change types such as 0/1 to 0/0 (`scripts/stat_italy/hete2homo.py`; synthetic example in `scripts/stat_italy/example_synthetic/`). The script compares the two files row by row, so they must hold the same sites in the same order and the same samples in the same columns; it now stops if they do not (the check compares CHROM, POS, REF and ALT).
 - Per-sample missing rate with `bcftools`, and library complexity with `preseq c_curve`.
 - Mapped-rate change before and after capture, and before and after PCR (`group4_capeff.py`, `pcr_bias/mappedrate_fold.py`, `dna_probe/group2_map.py`).
 - Site-level summaries: MAF distribution, distance between adjacent sites, het and missing rate (`scripts/stat_vcf/`, `scripts/stat_array/`).

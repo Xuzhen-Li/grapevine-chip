@@ -10,7 +10,8 @@ jobs with paths that only existed on that cluster. VCFs, BAMs, and probe
 tables are not in the repository.
 
 To analyze data from a chip you already have, use
-[gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit).
+[gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit)
+(genotyping by target sequencing).
 The grapevine 167K walkthrough is in
 [grapeancestry](https://github.com/Xuzhen-Li/grapeancestry) (demo report:
 [ramos2019_np.batch.report.html](https://xuzhen-li.github.io/grapeancestry/demo/results/ramos2019_np.batch.report.html)).
@@ -18,8 +19,8 @@ The grapevine 167K walkthrough is in
 ## Design in short
 
 1. Start from whole-genome SNP calls on the VS1 reference (19 chromosomes).
-2. Keep biallelic SNPs; filter by MAF and missingness (0.01/0.5 loose, 0.05/0.4 strict).
-3. LD-prune with `plink --indep-pairwise 50 5 r²` at several r² cutoffs. The cutoff sets the panel size.
+2. Keep biallelic SNPs; filter by MAF and missingness (0.01/0.5 loose; a 0.05/0.4 strict set appears in file names, but its command was not recorded).
+3. LD-prune with `plink --indep-pairwise 50 5 <r2>`, run at r² 0.1, 0.3 and 0.5 (file names also show 0.4 and 0.7). The cutoff sets the panel size.
 4. Keep sites with mean depth of at least 10.
 5. Score each site by minor allele frequency.
 6. Keep one site per 2 kb window, the one with the highest MAF.
@@ -29,7 +30,9 @@ The grapevine 167K walkthrough is in
 
 After the chip is made, compare its genotypes with the whole-genome calls on
 the same samples (`scripts/stat_italy/hete2homo.py`; a synthetic example is in
-`scripts/stat_italy/example_synthetic/`).
+`scripts/stat_italy/example_synthetic/`). The script pairs the two files row by
+row, so both must list the same sites in the same order and the same samples in
+the same columns; it stops with a message if they do not.
 
 ## Source
 

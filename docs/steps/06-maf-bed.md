@@ -20,5 +20,5 @@ awk '{if($5<$6)print $1"\t"$2"\t"$2+1"\t"$5; else print $1"\t"$2"\t"$2+1"\t"$6}'
 ## Get
 
 - The notes say plink `--freq` was not usable.
-- The BED used downstream is `ld03_maf2bed.bed`. The score is the smaller of the two `--freq2` allele counts, on a 1 bp interval.
+- The BED used downstream is `ld03_maf2bed.bed`. The score is the smaller of the two `--freq2` allele frequencies, on a 1 bp interval.
 - A second awk writes sites without the score (`ld03_maf2sites.bed`). That second awk body was not pasted.
