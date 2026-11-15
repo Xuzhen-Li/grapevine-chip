@@ -1,20 +1,46 @@
 # grapevine-chip
 
-How to design your own chip. This repo is the design path: choose sites, check them against the annotation, and freeze a panel. It is not a place to analyze data from a chip you already hold.
+Notes on how a grapevine SNP capture panel was designed: which sites were
+kept, how they were spaced, and why. Start with
+[docs/DESIGN_RATIONALE.md](docs/DESIGN_RATIONALE.md).
 
-The notes below are the grapevine capture-panel path as written in a local working notebook. They are not a portable pipeline. Many blocks are pasted SLURM job scripts from one cluster, with absolute paths and a private partition. Sequencing results, VCFs, BAMs, and probe tables stay off GitHub.
+This is a record of a single design, written from a working notebook. It is
+not a pipeline you can run from start to finish. Many commands are pasted from
+cluster (SLURM) jobs referencing paths that existed only on that cluster. VCFs, BAMs, and
+probe tables are not included in the repository.
 
-The analysis suite for data you already have is [gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit) (genotyping by target sequencing). The grapevine 167K walkthrough stays in [grapeancestry](https://github.com/Xuzhen-Li/grapeancestry). Demo report: [ramos2019_np.batch.report.html](https://xuzhen-li.github.io/grapeancestry/demo/results/ramos2019_np.batch.report.html).
+To analyze data from an existing chip, use
+[gtbs-chip-service-kit](https://github.com/Xuzhen-Li/gtbs-chip-service-kit)
+(genotyping by target sequencing).
+The grapevine 167K walkthrough is in
+[grapeancestry](https://github.com/Xuzhen-Li/grapeancestry) (demo report:
+[ramos2019_np.batch.report.html](https://xuzhen-li.github.io/grapeancestry/demo/results/ramos2019_np.batch.report.html)).
 
-Step detail: [docs/steps.md](docs/steps.md).
+## Design in short
 
-## Where the steps came from
+1. Start from whole-genome SNP calls on the VS1 reference (19 chromosomes).
+2. Keep biallelic SNPs; filter by MAF and missingness (0.01/0.5 loose; a 0.05/0.4 strict set appears in file names, though its command was not recorded).
+3. LD-prune with `plink --indep-pairwise 50 5 <r2>`, run at r² 0.1, 0.3, and 0.5 (file names also show 0.4 and 0.7). This cutoff determines the panel size.
+4. Keep sites with a mean depth of at least 10.
+5. Score each site by minor allele frequency.
+6. Keep one site per 2 kb window, selecting the one with the highest MAF.
+7. Repeat that selection inside exons, genes, and CDS, then merge.
+8. Add planned classes (breeding sites, population-private sites). These were never scripted.
+9. Freeze the union. Vendor scoring was planned as the final step and was not recorded.
 
-The ordered path is the local notebook in the local folder `00_array`. Reference names in that notebook are `VS1.final.fa` and `VS1.final.gff3`. Chromosome count used with plink is `--chr-set 19`.
+After the chip is made, compare its genotypes against whole-genome
+calls on the same samples (`scripts/stat_italy/hete2homo.py`; a synthetic
+example is in `scripts/stat_italy/example_synthetic/`). The script pairs the
+two files row by row, so both must list the same sites in the same order and
+the same samples in the same columns; it stops with a message if they do not.
 
-## Design path
+## Source
 
-One file per step. Each file is Input, Do, and Get. The list is [docs/steps.md](docs/steps.md).
+The steps follow a local notebook in a folder named `00_array`. Reference names in that notebook are `VS1.final.fa` and `VS1.final.gff3`. The chromosome count passed to plink is `--chr-set 19`.
+
+## Step files
+
+One file per step, each divided into Input, Do, and Get. Index: [docs/steps.md](docs/steps.md).
 
 1. [Where reads and sites fall](docs/steps/01-annotation-overlap.md)
 2. [SNP function](docs/steps/02-snp-function.md)
@@ -31,4 +57,4 @@ One file per step. Each file is Input, Do, and Get. The list is [docs/steps.md](
 13. [Capture freeze](docs/steps/13-freeze.md)
 14. [Unfinished SR4R branch](docs/steps/14-sr4r-branch.md)
 
-**Author:** Xuzhen Li · [ORCID](https://orcid.org/0000-0003-3670-6657)
+Author: Xuzhen Li ([ORCID](https://orcid.org/0000-0003-3670-6657))
