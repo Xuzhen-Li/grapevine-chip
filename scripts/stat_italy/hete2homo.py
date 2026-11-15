@@ -26,11 +26,13 @@ def check_aligned(df_wgs, df_cap):
                          f"but {' '.join(sites_cap[i])} in capture; sort both files the same way")
     for label, df in (("WGS", df_wgs), ("capture", df_cap)):
         cells = df.iloc[:, 4:]
+        # Files are read with keep_default_na=False, so an empty cell is '' and "NA"/"nan" stay as text.
         broken = cells.isna() | ~cells.apply(lambda c: c.astype(str).str.contains('=', regex=False))
         if broken.values.any():
             r, c = (int(x[0]) for x in broken.values.nonzero())
             value = cells.iat[r, c]
-            what = "is empty" if pd.isna(value) else f"is {value!r}, with no '=' between sample and genotype"
+            empty = pd.isna(value) or str(value).strip() == ""
+            what = "is empty" if empty else f"is {value!r}, with no '=' between sample and genotype"
             raise SystemExit(f"bad genotype cell in {label}: row {r + 1}, column {c + 5} {what}; "
                              f"every sample cell must look like SAMPLE=GENOTYPE")
     for col in df_wgs.columns[4:]:
@@ -46,8 +48,8 @@ path_wgs = "wgs_genotypes.txt"
 path_cap = "cap_genotypes.txt"
 
 # Load data
-df_wgs = pd.read_csv(path_wgs, sep="\t", header=None)
-df_cap = pd.read_csv(path_cap, sep="\t", header=None)
+df_wgs = pd.read_csv(path_wgs, sep="\t", header=None, keep_default_na=False)
+df_cap = pd.read_csv(path_cap, sep="\t", header=None, keep_default_na=False)
 check_aligned(df_wgs, df_cap)
 
 # Assuming the first four columns are chromosome, position, reference allele, and variant allele, respectively
@@ -84,8 +86,8 @@ path_to_wgs_file = 'wgs_genotypes.txt'
 path_to_cap_file = 'cap_genotypes.txt'
 
 # Load the files, assuming there is no header present
-df_wgs = pd.read_csv(path_to_wgs_file, sep='\t', header=None)
-df_cap = pd.read_csv(path_to_cap_file, sep='\t', header=None)
+df_wgs = pd.read_csv(path_to_wgs_file, sep='\t', header=None, keep_default_na=False)
+df_cap = pd.read_csv(path_to_cap_file, sep='\t', header=None, keep_default_na=False)
 check_aligned(df_wgs, df_cap)
 
 # Print the first few lines of the data to check them
@@ -161,8 +163,8 @@ path_to_wgs_file = 'wgs_genotypes.txt'
 path_to_cap_file = 'cap_genotypes.txt'
 
 # Try to read the files assuming there is no header
-df_wgs = pd.read_csv(path_to_wgs_file, sep='\t', header=None)
-df_cap = pd.read_csv(path_to_cap_file, sep='\t', header=None)
+df_wgs = pd.read_csv(path_to_wgs_file, sep='\t', header=None, keep_default_na=False)
+df_cap = pd.read_csv(path_to_cap_file, sep='\t', header=None, keep_default_na=False)
 check_aligned(df_wgs, df_cap)
 
 # Print the first few rows of the data to inspect them
