@@ -5,8 +5,8 @@ kept, how they were spaced, and why. Start with
 [docs/DESIGN_RATIONALE.md](docs/DESIGN_RATIONALE.md).
 
 This is a record of a single design, written from a working notebook. It is
-not an end-to-end runnable pipeline. Many commands are pasted cluster (SLURM)
-jobs referencing paths that existed only on that cluster. VCFs, BAMs, and
+not a pipeline you can run from start to finish. Many commands are pasted from
+cluster (SLURM) jobs referencing paths that existed only on that cluster. VCFs, BAMs, and
 probe tables are not included in the repository.
 
 To analyze data from an existing chip, use
