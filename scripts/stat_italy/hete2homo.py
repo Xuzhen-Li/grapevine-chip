@@ -24,6 +24,15 @@ def check_aligned(df_wgs, df_cap):
         i = int(bad.argmax())
         raise SystemExit(f"not aligned: row {i + 1} is {' '.join(sites_wgs[i])} in WGS "
                          f"but {' '.join(sites_cap[i])} in capture; sort both files the same way")
+    for label, df in (("WGS", df_wgs), ("capture", df_cap)):
+        cells = df.iloc[:, 4:]
+        broken = cells.isna() | ~cells.apply(lambda c: c.astype(str).str.contains('=', regex=False))
+        if broken.values.any():
+            r, c = (int(x[0]) for x in broken.values.nonzero())
+            value = cells.iat[r, c]
+            what = "is empty" if pd.isna(value) else f"is {value!r}, with no '=' between sample and genotype"
+            raise SystemExit(f"bad genotype cell in {label}: row {r + 1}, column {c + 5} {what}; "
+                             f"every sample cell must look like SAMPLE=GENOTYPE")
     for col in df_wgs.columns[4:]:
         names_wgs = set(df_wgs[col].astype(str).str.split('=').str[0])
         names_cap = set(df_cap[col].astype(str).str.split('=').str[0])
